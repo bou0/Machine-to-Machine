@@ -1,5 +1,5 @@
-<?php $title = "Bienvenue dans M2M Stockage de data d'objets connectés"; ?>
-<?php require "includes/header.php"; ?>
+<?php $title = "Bienvenue dans M2M Stockage de data d'objets connectÃ©s"; ?>
+<?php require "pages/header.php"; ?>
 
 <!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 	
@@ -11,7 +11,7 @@
     	<form action="" method= "post" id="register_form" onsubmit="return false;" >
 
     
-        	<h2 class="form-signin-heading">Crééer un compte</h2>
+        	<h2 class="form-signin-heading">CrÃ©er un compte</h2>
         	<div class = "form-group"> 
         		<label for="pseudo">Pseudo:</label>
     			<input type="text" placeholder="Entrez votre pseudo" id="pseudo" name="pseudo" maxlength="16" required 
@@ -30,7 +30,7 @@
         	</div>
         	
         	<div class = "form-group"> 
-        		<label for="email">Adresse electronique:</label>
+        		<label for="email">Adresse Ã©lectronique:</label>
     			<input type="email" placeholder="johndoe@exemple.com" id="email" name="email" required
     				class="form-control" onblur="verifMail(this)"/>
     			<small id="output_email"></small>
@@ -41,8 +41,8 @@
         	<div id="status">
     			Remplir tous les champs
     		</div>
-    		<input type="submit" id="bRegister" class="btn btn-success" value="Valid" /><br/><br/>
-    		<input type="button" class="btn btn-primary" value="Créer un compte"  onClick="window.location.href='account_authentification.php'"/>
+    		<input type="submit" id="bRegister" class="btn btn-success" value="Valid" />
+    		<input type="button" class="btn btn-primary" value="Compte"  onClick="window.location.href='account_authentification.php'"/>
     	</form>
     </section>
 
@@ -64,8 +64,10 @@
 				<label for="cnx_persistent">
 					<input type="checkbox" id="cnx_persistent" style="vertical-align: top;"/> Garder ma session active
 				</label>
-				<a href="#">Mot de passe oublié ?</a> <br/>
-				<input type="submit" class="btn btn-primary" value="Connexion" />
+				<a href="#">Mot de passe oubliÃ© ?</a> <br/>
+				<input type="button" class="btn btn-primary" value="CrÃ©er un compte"  onClick="window.location.href='account_create.php'"/>
+				
+				<input type="submit" class="btn btn-success" value="Connexion" />
 			</p>
 			<div id="status2">
 				Remplir tous les champs
@@ -90,36 +92,36 @@
         });
 
         $("#pseudo").keyup(function(){
-        	//On vérifie si le pseudo est ok ou n'a pas ete déjà pris
+        	//On vÃ©rifie si le pseudo est ok ou n'a pas ete dÃ©jÃ  pris
         		check_pseudo();
         });
 
         $("#pass1").keyup(function(){
-        	//On vérifie si le mot de passe est ok
+        	//On vÃ©rifie si le mot de passe est ok
         		if($(this).val().length < 6){
-        			$("#output_pass1").css("color", "red").html("<br/>Trop court (6 caractères minimum)");
+        			$("#output_pass1").css("color", "red").html("<br/>Trop court (6 caractÃ¨res minimum)");
         		} else if($("#pass2").val() != "" && $("#pass2").val() != $("#pass1").val()){
-        			$("#output_pass1").html("<br/>Les deux mots de passe sont différents");
-        			$("#output_pass2").html("<br/>Les deux mots de passe sont différents");
+        			$("#output_pass1").html("<br/>Les deux mots de passe sont diffÃ©rents");
+        			$("#output_pass2").html("<br/>Les deux mots de passe sont diffÃ©rents");
         		} else {
         			$("#output_pass1").html('<img src="img/check.png" class="small_image" alt="" />');
         		}
         });
 
         $("#pass2").keyup(function(){
-        	//On vérifie si les mots de passe coïncident
+        	//On vÃ©rifie si les mots de passe coincident
         		check_password();
         });
 
         $("#email").keyup(function(){
-        	//On vérifie si les mots de passe coïncident
+        	//On vÃ©rifie si les mots de passe coincident
         		check_email();
         });
 
         function check_pseudo(){
         		$.ajax({
         			type: "post",
-        			url:  "register.php",
+        			url:  "pages/account_process.php",
         			data: {
         				'pseudo_check' : $("#pseudo").val()
         			},
@@ -137,7 +139,7 @@
         function check_password(){
         		$.ajax({
         			type: "post",
-        			url:  "register.php",
+        			url:  "pages/account_process.php",
         			data: {
         				'pass1_check' : $("#pass1").val(),
         				'pass2_check' : $("#pass2").val()
@@ -156,7 +158,7 @@
         function check_email(){
         		$.ajax({
         			type: "post",
-        			url:  "register.php",
+        			url:  "pages/account_process.php",
         			data: {
         				'email_check' : $("#email").val()
         			},
@@ -182,11 +184,11 @@
 			if(pseudo == "" || pass1 == "" || pass2 == "" || email == "" ){
 				status.html("Veuillez remplir tous les champs").fadeIn(400);
 			} else if(pass1 != pass2) {
-				status.html("Les deux mots de passe sont différents").fadeIn(400);
+				status.html("Les deux mots de passe sont diffï¿½rents").fadeIn(400);
 			} else {	
 				$.ajax({
 					type: "post",
-					url:  "register.php",
+					url:  "pages/account_process.php",
 					data: {
 						
 						'pseudo' : pseudo,
@@ -203,11 +205,10 @@
 									$("#bRegister").attr("value", "Inscription");
 									$("#bRegister").addClass("btn-primary").css("color", "white");
 								} else {
-									$("#presentation").hide();
 									$("#connexion").show();
 									$("#connexion h1").html("Connexion");
-									$("#inscription").html("<strong>Juste une dernière étape " + pseudo  + " " + email + 
-											" !</strong><br/>Un lien d'activation de votre compte vient de vous être envoyé à l'adresse électronique indiquée lors de l'inscription.<br/>Veuillez tout simplement cliquer ce lien pour finir votre inscription.<br/><em>(Pensez à vérifier vos spams ou courriers indésirables, si vous ne voyez pas ce mail dans votre boîte de réception)</em><br/><br/>").css("width", "inherit").fadeIn(400);
+									$("#inscription").html("<strong>Juste une derniÃ¨re Ã©tape " + pseudo  + " " + 
+											" !</strong><br/>Un lien d'activation de votre compte vient de vous Ãªtre envoyÃ© Ã  l'adresse Ã©lectronique indiquÃ©e lors de l'inscription.<br/>Veuillez tout simplement cliquer ce lien pour finir votre inscription.<br/><em>(Pensez Ã  vÃ©rifier vos spams ou courriers indÃ©sirables, si vous ne voyez pas ce mail dans votre boÃ®te de rÃ©ception)</em><br/><br/>").css("width", "inherit").fadeIn(400);
 								}
 							 }
 				});
@@ -241,9 +242,10 @@
 					success: function(data){
 						if(data == "login_failed"){
 							status.html("Pseudo ou mot de passe invalide !").fadeIn(400);
-						} else {
-							window.location = "profile.php";
-						}
+						} 
+// 						else {
+// 							//window.location = "pages/object_create.php";
+// 						}
 					}
 				});
 			}
@@ -255,4 +257,4 @@
     
 		        
     </script>
-<?php require "includes/footer.php"; ?>
+<?php require "pages/footer.php"; ?>

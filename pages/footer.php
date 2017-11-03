@@ -1,4 +1,5 @@
 		</div>
+		<hr/>
 		<footer id="main_footer">
 			<p>
 				<span class="muted">FABLAB &copy; <?php echo strftime('%Y'); ?></span> 

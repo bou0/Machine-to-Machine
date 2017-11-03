@@ -1,5 +1,5 @@
 <?php
-// Reference de l'acces à la base de données
+// Reference de l'acces Ã  la base de donnÃ©es
 define("BDD_MDP","IGpoa34opELHpLYg");
 define("BDD_USER","web");
 define("BDD_HOST", "localhost");
