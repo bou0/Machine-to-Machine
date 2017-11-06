@@ -4,8 +4,8 @@
  * Nous créons deux variables : $username et $password qui valent respectivement "Sdz" et "salut"
  */
 
-$username = $_POST['pseudo'];
-$password = $_POST['pass'];
+$username =  "Sdz";
+$password =  "salut";
 
 if( isset($_POST['pseudo']) && isset($_POST['pass']) ){
     
@@ -18,7 +18,7 @@ if( isset($_POST['pseudo']) && isset($_POST['pass']) ){
         echo "Failed";
     }
     
-  
+    
     
 }
 

@@ -52,7 +52,7 @@
 			} else {
 				$.ajax({
 					type: 'post',
-					url: "pages/login.php",
+					url: "login.php",
 					data: {
 						'pseudo' : pseudo,
 						'pass' : pass
@@ -64,9 +64,9 @@
 						if(data == "login_failed"){
 							status.html("Pseudo ou mot de passe invalide !").fadeIn(400);
 						} 
-// 						else {
-// 							window.location = "pages/object_create.php";
-// 						}
+						else {
+							window.location = "pages/object_create.php";
+						}
 					}
 				});
 			}

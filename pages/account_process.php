@@ -50,7 +50,7 @@
                  )";
                 $db->exec($create_table);
                 //Envoie de mail
-                require_once "send_mail.php";
+                require_once "account_send_mail.php";
         }
         exit();
     }

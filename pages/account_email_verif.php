@@ -1,6 +1,6 @@
 <?php
 
-    //V�rification du pseudo
+    //Vérification du pseudo
     if(!empty($_POST['pseudo_check'])){
         $pseudo = $_POST['pseudo_check'];
         $pseudo = preg_replace('#[^a-z0-9]#i', '', $pseudo); // filter everything but letters and numbers
@@ -30,7 +30,7 @@
         }
     }
     
-    //V�rification des mots de passe
+    //Vérification des mots de passe
     if(!empty($_POST['pass1_check']) && !empty($_POST['pass2_check'])){
         if(strlen($_POST['pass1_check']) < 6 || strlen($_POST['pass1_check'])  < 6){
             echo '<br/>Trop court (6 caractères minimum)';
@@ -45,7 +45,7 @@
         
     }
     
-    //V�rification de l'email
+    //Vérification de l'email
     if(!empty($_POST['email_check'])){
         $email = $_POST['email_check'];
         
