@@ -1,5 +1,5 @@
 <?php $title = "Bienvenue dans M2M Stockage de data d'objets connectés"; ?>
-<?php require "pages/header.php"; ?>
+<?php require "header.php"; ?>
 
 <!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 	
@@ -42,7 +42,7 @@
     			Remplir tous les champs
     		</div>
     		<input type="submit" id="bRegister" class="btn btn-success" value="Valid" />
-    		<input type="button" class="btn btn-primary" value="Compte"  onClick="window.location.href='account_authentification.php'"/>
+    		<input type="button" class="btn btn-primary" value="Compte"  onClick="window.location.href='index.php'"/>
     	</form>
     </section>
 
@@ -54,25 +54,11 @@
 <!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 
     <section id="connexion">
-		<h1>Connectez-vous</h1>
-		<form id="login_form" method="post" onsubmit="return false;">
-			<p>
-				<label for="login">Pseudo:</label>
-				<input type="text" placeholder="Entrez votre pseudo" id="login" name="login" required/>
-				<label for="mdp">Mot de passe:</label>
-				<input type="password" id="mdp" name="mdp" required/>
-				<label for="cnx_persistent">
-					<input type="checkbox" id="cnx_persistent" style="vertical-align: top;"/> Garder ma session active
-				</label>
-				<a href="#">Mot de passe oublié ?</a> <br/>
-				<input type="button" class="btn btn-primary" value="Créer un compte"  onClick="window.location.href='account_create.php'"/>
-				
-				<input type="submit" class="btn btn-success" value="Connexion" />
-			</p>
-			<div id="status2">
-				Remplir tous les champs
-			</div>
-		</form>
+		<h1 for="button">
+			Cliquez sur ici pour vous connecter
+			<input type="button" class="btn btn-success" value="Se connecter"  onClick="window.location.href='index.php'"/>
+			avec les informations qui vous ont été envoyé par email.
+		</h1>
 	</section>
    
 <!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
@@ -85,176 +71,136 @@
 	
 	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script>
-    $(document).ready(function(){
-    	$("#connexion").hide();
-		$("#register_form input").focus(function(){
-        	$("#status").fadeOut(800);
-        });
-
-        $("#pseudo").keyup(function(){
-        	//On vérifie si le pseudo est ok ou n'a pas ete déjà pris
-        		check_pseudo();
-        });
-
-        $("#pass1").keyup(function(){
-        	//On vérifie si le mot de passe est ok
-        		if($(this).val().length < 6){
-        			$("#output_pass1").css("color", "red").html("<br/>Trop court (6 caractères minimum)");
-        		} else if($("#pass2").val() != "" && $("#pass2").val() != $("#pass1").val()){
-        			$("#output_pass1").html("<br/>Les deux mots de passe sont différents");
-        			$("#output_pass2").html("<br/>Les deux mots de passe sont différents");
-        		} else {
-        			$("#output_pass1").html('<img src="img/check.png" class="small_image" alt="" />');
-        		}
-        });
-
-        $("#pass2").keyup(function(){
-        	//On vérifie si les mots de passe coincident
-        		check_password();
-        });
-
-        $("#email").keyup(function(){
-        	//On vérifie si les mots de passe coincident
-        		check_email();
-        });
-
-        function check_pseudo(){
-        		$.ajax({
-        			type: "post",
-        			url:  "pages/account_process.php",
-        			data: {
-        				'pseudo_check' : $("#pseudo").val()
-        			},
-        			success: function(data){
-        						if(data == "success"){
-        							$("#output_checkuser").html('<img src="img/check.png" class="small_image" alt="" />');
-        							return true;
-        						} else {
-        							$("#output_checkuser").css("color", "red").html(data);
-        						}
-        					 }
-        		});
-        }
-
-        function check_password(){
-        		$.ajax({
-        			type: "post",
-        			url:  "pages/account_process.php",
-        			data: {
-        				'pass1_check' : $("#pass1").val(),
-        				'pass2_check' : $("#pass2").val()
-        			},
-        			success: function(data){
-        						if(data == "success"){
-        							 $("#output_pass2").html('<img src="img/check.png" class="small_image" alt="" />');
-        							 $("#output_pass1").html('<img src="img/check.png" class="small_image" alt="" />');
-        						} else {
-        							$("#output_pass2").css("color", "red").html(data);
-        						}
-        					 }
-        		});
-        }
-
-        function check_email(){
-        		$.ajax({
-        			type: "post",
-        			url:  "pages/account_process.php",
-        			data: {
-        				'email_check' : $("#email").val()
-        			},
-        			success: function(data){
-        						if(data == "success"){
-        							$("#output_email").html('<img src="img/check.png" class="small_image" alt="" />');
-        						} else {
-        							$("#output_email").css("color", "red").html(data);
-        						}
-        					 }
-        		});
-        }
-
-
-    	//Traitement du formulaire d'inscription
-		$("#register_form").submit(function(){
-			var status = $("#status");
-			var pseudo = $("#pseudo").val();
-			var pass1 = $("#pass1").val();
-			var pass2 = $("#pass2").val();
-			var email = $("#email").val();
-
-			if(pseudo == "" || pass1 == "" || pass2 == "" || email == "" ){
-				status.html("Veuillez remplir tous les champs").fadeIn(400);
-			} else if(pass1 != pass2) {
-				status.html("Les deux mots de passe sont diff�rents").fadeIn(400);
-			} else {	
-				$.ajax({
-					type: "post",
-					url:  "pages/account_process.php",
-					data: {
-						
-						'pseudo' : pseudo,
-						'pass1' : pass1,
-						'pass2' : pass2,
-						'email' : email,
-					},
-					beforeSend: function(){
-									$("#bRegister").attr("value", "Traitement en cours...");
-								},
-					success: function(data){
-								if(data != "register_success"){
-									status.html(data).fadeIn(400);
-									$("#bRegister").attr("value", "Inscription");
-									$("#bRegister").addClass("btn-primary").css("color", "white");
-								} else {
-									$("#connexion").show();
-									$("#connexion h1").html("Connexion");
-									$("#inscription").html("<strong>Juste une dernière étape " + pseudo  + " " + 
-											" !</strong><br/>Un lien d'activation de votre compte vient de vous être envoyé à l'adresse électronique indiquée lors de l'inscription.<br/>Veuillez tout simplement cliquer ce lien pour finir votre inscription.<br/><em>(Pensez à vérifier vos spams ou courriers indésirables, si vous ne voyez pas ce mail dans votre boîte de réception)</em><br/><br/>").css("width", "inherit").fadeIn(400);
-								}
-							 }
-				});
-			}
-		});
-
-		<!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-		
-	    <!-- 									J A V A S C R I P T                                                    -->
-	    <!-- 	        	 			  A U T H E N T I F I C A T I O N                                              -->
-
-	    <!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-	    $("#login_form").submit(function(){
-			var pseudo = $("#login").val();
-			var pass   = $("#mdp").val();
-			var status = $("#status2");	
-			
-			if(pseudo == "" || pass == ""){
-				status.html("Veuillez remplir tous les champs.").fadeIn(400);	
-			} else {
-				$.ajax({
-					type: 'post',
-					url: "login.php",
-					data: {
-						'pseudo' : pseudo,
-						'pass' : pass
-					},
-					beforeSend: function(){
-						status.html("Connexion en cours...").fadeIn(400);
-					},
-					success: function(data){
-						if(data == "login_failed"){
-							status.html("Pseudo ou mot de passe invalide !").fadeIn(400);
-						} 
-// 						else {
-// 							//window.location = "pages/object_create.php";
-// 						}
-					}
-				});
-			}
-		});
-	       
-		
-	});
+        $(document).ready(function(){
+        	$("#connexion").hide();
+    		$("#register_form input").focus(function(){
+            	$("#status").fadeOut(800);
+            });
+    
+            $("#pseudo").keyup(function(){
+            	//On vérifie si le pseudo est ok ou n'a pas ete déjà pris
+            		check_pseudo();
+            });
+    
+            $("#pass1").keyup(function(){
+            	//On vérifie si le mot de passe est ok
+            		if($(this).val().length < 6){
+            			$("#output_pass1").css("color", "red").html("<br/>Trop court (6 caractères minimum)");
+            		} else if($("#pass2").val() != "" && $("#pass2").val() != $("#pass1").val()){
+            			$("#output_pass1").html("<br/>Les deux mots de passe sont différents");
+            			$("#output_pass2").html("<br/>Les deux mots de passe sont différents");
+            		} else {
+            			$("#output_pass1").html('<img src="img/check.png" class="small_image" alt="" />');
+            		}
+            });
+    
+            $("#pass2").keyup(function(){
+            	//On vérifie si les mots de passe coincident
+            		check_password();
+            });
+    
+            $("#email").keyup(function(){
+            	//On vérifie si les mots de passe coincident
+            		check_email();
+            });
+    
+            function check_pseudo(){
+            		$.ajax({
+            			type: "post",
+            			url:  "pages/account_process.php",
+            			data: {
+            				'pseudo_check' : $("#pseudo").val()
+            			},
+            			success: function(data){
+            						if(data == "success"){
+            							$("#output_checkuser").html('<img src="img/check.png" class="small_image" alt="" />');
+            							return true;
+            						} else {
+            							$("#output_checkuser").css("color", "red").html(data);
+            						}
+            					 }
+            		});
+            }
+    
+            function check_password(){
+            		$.ajax({
+            			type: "post",
+            			url:  "pages/account_process.php",
+            			data: {
+            				'pass1_check' : $("#pass1").val(),
+            				'pass2_check' : $("#pass2").val()
+            			},
+            			success: function(data){
+            						if(data == "success"){
+            							 $("#output_pass2").html('<img src="img/check.png" class="small_image" alt="" />');
+            							 $("#output_pass1").html('<img src="img/check.png" class="small_image" alt="" />');
+            						} else {
+            							$("#output_pass2").css("color", "red").html(data);
+            						}
+            					 }
+            		});
+            }
+    
+            function check_email(){
+            		$.ajax({
+            			type: "post",
+            			url:  "pages/account_process.php",
+            			data: {
+            				'email_check' : $("#email").val()
+            			},
+            			success: function(data){
+            						if(data == "success"){
+            							$("#output_email").html('<img src="img/check.png" class="small_image" alt="" />');
+            						} else {
+            							$("#output_email").css("color", "red").html(data);
+            						}
+            					 }
+            		});
+            }
     
     
+        	//Traitement du formulaire d'inscription
+    		$("#register_form").submit(function(){
+    			var status = $("#status");
+    			var pseudo = $("#pseudo").val();
+    			var pass1 = $("#pass1").val();
+    			var pass2 = $("#pass2").val();
+    			var email = $("#email").val();
+    
+    			if(pseudo == "" || pass1 == "" || pass2 == "" || email == "" ){
+    				status.html("Veuillez remplir tous les champs").fadeIn(400);
+    			} else if(pass1 != pass2) {
+    				status.html("Les deux mots de passe sont diff�rents").fadeIn(400);
+    			} else {	
+    				$.ajax({
+    					type: "post",
+    					url:  "pages/account_process.php",
+    					data: {
+    						
+    						'pseudo' : pseudo,
+    						'pass1' : pass1,
+    						'pass2' : pass2,
+    						'email' : email,
+    					},
+    					beforeSend: function(){
+    									$("#bRegister").attr("value", "Traitement en cours...");
+    								},
+    					success: function(data){
+    								if(data != "register_success"){
+    									status.html(data).fadeIn(400);
+    									$("#bRegister").attr("value", "Inscription");
+    									$("#bRegister").addClass("btn-primary").css("color", "white");
+    								} else {
+    									$("#connexion").show();
+    									$("#connexion h1").html("Connexion");
+    									$("#inscription").html("<strong>Juste une dernière étape " + pseudo  + " " + 
+    											" !</strong><br/>Un lien d'activation de votre compte vient de vous être envoyé à l'adresse électronique indiquée lors de l'inscription.<br/>Veuillez tout simplement cliquer ce lien pour finir votre inscription.<br/><em>(Pensez à vérifier vos spams ou courriers indésirables, si vous ne voyez pas ce mail dans votre boîte de réception)</em><br/><br/>").css("width", "inherit").fadeIn(400);
+    								}
+    							 }
+    				});
+    			}
+    		});
+    	});
 		        
     </script>
-<?php require "pages/footer.php"; ?>
+<?php require "footer.php"; ?>

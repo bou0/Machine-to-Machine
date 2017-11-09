@@ -1,5 +1,5 @@
 <?php $title = "Bienvenue dans M2M Stockage de data d'objets connectés"; ?>
-<?php require "pages/header.php"; ?>
+<?php require "header.php"; ?>
 
 <!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 	
@@ -9,25 +9,9 @@
 <!-- 	:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 
     <section id="connexion">
-		<h1>Connectez-vous</h1>
-		<form id="login_form" method="post" onsubmit="return false;">
-			<p>
-				<label for="login">Pseudo:</label>
-				<input type="text" placeholder="Entrez votre pseudo" id="login" name="login" required/>
-				<label for="mdp">Mot de passe:</label>
-				<input type="password" id="mdp" name="mdp" required/>
-				<label for="cnx_persistent">
-					<input type="checkbox" id="cnx_persistent" style="vertical-align: top;"/> Garder ma session active
-				</label>
-				<a href="#">Mot de passe oublié ?</a> <br/>
-				<input type="button" class="btn btn-primary" value="Créer un compte"  onClick="window.location.href='account_create.php'"/>
-    	
-				<input type="submit" class="btn btn-success" value="Connexion" />
-			</p>
-			<div id="status2">
-				Remplir tous les champs
-			</div>
-		</form>
+		<h1>Cliquez sur ce bouton pour vous connecter <a href="index.html">ce Lien pour se connecter</a></h1>
+		<input type="button" class="btn btn-primary" value="Se connecter"  onClick="window.location.href='index.php'"/>
+		
 	</section>
    
 
@@ -65,7 +49,7 @@
 							status.html("Pseudo ou mot de passe invalide !").fadeIn(400);
 						} 
 						else {
-							window.location = "pages/object_create.php";
+							window.location = "pages/object_list.php";
 						}
 					}
 				});
@@ -78,4 +62,4 @@
     
 		        
     </script>
-<?php require "pages/footer.php"; ?>
+<?php require "footer.php"; ?>

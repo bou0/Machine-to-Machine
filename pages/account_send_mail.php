@@ -24,7 +24,7 @@ $message = "<!DOCTYPE html>
         								Mot de passe    : $pass1<br/>
                                         clé             : $cle  <br/>
         						   </p>
-        						   <p>Rendez-vous sur le site <a href=\"http://localhost/m2m/acount_authentification\"></a></p>
+        						   <p>Rendez-vous sur le site <a href=\"http://localhost/m2m/index.php\"></a></p>
         						</body>
         					</html>";
 

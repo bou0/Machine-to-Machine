@@ -28,7 +28,8 @@
             echo "Les mots de passe ne correspondent pas.";
         } else {
                 $cle        = md5($email);
-                $nomtable   = 'data_'.preg_replace('/[^a-zA-Z0-9]/', '', $email);
+                $nomtable_user_data     = preg_replace('/[^a-zA-Z0-9]/', '', $email).'_data';
+                $nomtable_user_object   = preg_replace('/[^a-zA-Z0-9]/', '', $email).'_object';
                 $hash_pass = sha1($pass1);
                 
                 $q = $db->prepare('INSERT INTO users(pseudo, email, password, ip, created, cle, nomtable)
@@ -39,17 +40,33 @@
                     'password'  => $hash_pass,
                     'ip'        => $_SERVER['REMOTE_ADDR'],
                     'cle'       => $cle,
-                    'nomtable'  => $nomtable
+                    'nomtable'  => $nomtable_user_data
                 ));
                 $user_id = $db->lastInsertId();
-                //Création de la table
-                $create_table = "CREATE TABLE $nomtable(
-                    id_object INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                    objectIO VARCHAR(100),
-                    data1 VARCHAR(100)
-                 )";
-                $db->exec($create_table);
-                //Envoie de mail
+                
+                //Création de la table user_data
+                $create_table_user_data = ('CREATE TABLE $nomtable_user_data(
+                        `date` datetime NOT NULL,
+                        `object_id` int(11) NOT NULL,
+                         PRIMARY KEY (`date`)
+                        )');
+                
+                //Création de la table user_object
+                $create_table_user_object = ('CREATE TABLE $nomtable_user_object(
+                        `id` int(11) NOT NULL,
+                        `nom` varchar(250) NOT NULL,
+                        `description` varchar(250) NOT NULL,
+                        `mesure` double NOT NULL,
+                        `unite` varchar(255) NOT NULL,
+                        PRIMARY KEY (`id`)
+                        )');
+                
+                $db->exec($create_table_user_data);
+                $db->exec($create_table_user_object);
+
+                
+                
+//                 Envoie de mail
                 require_once "account_send_mail.php";
         }
         exit();

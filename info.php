@@ -11,7 +11,7 @@ if(!empty($_GET['msg'])){
 		$message = '<h2>Activation réussie</h2>
 					<p>Votre compte est maintenant activé.<br/>
 					
-					Vous pouvez cliquer sur ce <a style="color:yellow" href="account_authentification.php">lien</a> pour vous connecter.</p>';
+					Vous pouvez cliquer sur ce <a style="color:yellow" href="index.php">lien</a> pour vous connecter.</p>';
 	} else if($msg == "fake_parameters") {
 		$message = '<h2>Paramètres érronés</h2>
 					<p>Les paramètres fournis dans l\'URL sont érronés<br/>
@@ -24,7 +24,7 @@ if(!empty($_GET['msg'])){
 	$message = "Aucun message";
 }
 ?>
-<?php require "pages/header.php"; ?>
+<?php require "header.php"; ?>
 		<div class="info"><?php echo $message; ?></div>
-<?php require "pages/footer.php"; ?>
+<?php require "footer.php"; ?>
 		
