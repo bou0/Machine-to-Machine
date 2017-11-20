@@ -79,7 +79,7 @@
             <br/><br></br>
             <?php include '../footer.php';?>
             <script src="../bootstrap/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="jquery.min.js"></script>
+            <script type="text/javascript" src="../js/jquery.min.js"></script>
             	<!-- Script for table Object usermail -->
             	<script>
             		$.ajax({
@@ -96,7 +96,7 @@
             
             					// Ajout des lignes dans le tableau d'affichage
             					$("table#users_info").append('<tr>\
-                						<td>'+ user.object_id +'</td>\
+                						<td>'+ user.id +'</td>\
                 						<td>'+ user.nom +'</td>\
                 						<td>'+ user.description +'</td>\
                 						<td>'+ user.mesure +'</td>\

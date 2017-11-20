@@ -1,9 +1,11 @@
 
 <?php
-    require 'connect_db.php';
-    require 'param_tables.php';
+    require_once 'connect_db.php';
+    session_start();
+
+    $usermail_object_courant = $_SESSION['super_user_email'];
     
-    $req = $db->query("SELECT * FROM $nomtable_user_object");
+    $req = $db->query("SELECT * FROM $usermail_object_courant");/*.nomtable_user_object($email)*/
     $result = array();
     
     while ($row = $req->fetch(PDO::FETCH_OBJ) ){

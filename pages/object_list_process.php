@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	require_once 'params.php';
 	require_once 'connect_db.php';
 
 	if(isset($_POST['btn-login']))
@@ -22,10 +23,12 @@
 				
 				echo "ok"; // log in
 				$_SESSION['user_session'] = $row['id'];
+				$_SESSION['user_email']   = trim($_POST['email']);
+				$_SESSION['super_user_email']= nomtable_user_object($_SESSION['user_email']);
 			}
 			else{
 				
-				echo "email or password does not exist."; // wrong details 
+				echo "email ou password n'existe pas."; // wrong details 
 			}
 				
 		}
