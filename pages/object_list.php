@@ -53,7 +53,7 @@
             			  <span class="glyphicon glyphicon-user"></span>&nbsp;Bonjour <?php echo $row['pseudo']; ?>&nbsp;<span class="caret"></span></a>
                           <ul class="dropdown-menu">
 <!--                             <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;View Profile</a></li> -->
-                            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Sign Out</a></li>
+                            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Se déconnecter</a></li>
                           </ul>
                         </li>
                       </ul>
