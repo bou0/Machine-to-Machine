@@ -25,7 +25,12 @@ hgroup>h1 {
 		text-shadow: 1px 1px 3px #ccc;
 }
 
-	
+.container{
+	width: auto; 
+	padding: 12px; 
+	border-radius: 10px;
+	align: center;
+}	
 
 
 #presentation, #inscription, #connexion {

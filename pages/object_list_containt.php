@@ -1,5 +1,6 @@
 
 <?php
+// Requete permettant de Lister les objects d'utilisateur courant 
     require_once 'connect_db.php';
     session_start();
 
